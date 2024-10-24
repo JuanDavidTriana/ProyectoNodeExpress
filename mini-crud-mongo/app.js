@@ -1,22 +1,26 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
 const port = 3000;
 
 app.use(express.json());    // Middleware para poder recir Json en la petición
 
-// Datos temporales almacenados en la memoria
-let products = [
-    { id: 1, name: 'iPhone', price: 1000 },
-    { id: 2, name: 'iPad', price: 2000 },
-    { id: 3, name: 'MacBook', price: 2500 },
-    { id: 4, name: 'Apple Watch', price: 500 },
-    { id: 5, name: 'AirPods', price: 150 },
-    { id: 6, name: 'Apple TV', price: 100 },
-    { id: 7, name: 'iMac', price: 1500 },
-    { id: 8, name: 'Mac Mini', price: 800 },
-    { id: 9, name: 'HomePod', price: 300 },
-    { id: 10, name: 'Magic Mouse', price: 80 }
-];
+// URL de Conexion a MongoDB Atlas
+const uri = 'mongodb+srv://admin:admin12345@cluster0.9dakp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+
+// Conexion a MongoDB Atlas
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('Connected to MongoDB Atlas'))
+    .catch(error => console.error('Error connecting to MongoDB Atlas:', error));
+
+//Definir el esquema de datos
+const productSchema = new mongoose.Schema({
+    name: String,
+    price: Number
+});
+
+// Modelo de productos
+const Product = mongoose.model('Product', productSchema);
 
 // Endpoint para obtener todos los productos
 app.get('/products', (req, res) => {
