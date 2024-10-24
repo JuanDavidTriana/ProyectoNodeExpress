@@ -28,11 +28,15 @@ app.get('/products', (req, res) => {
 });
 
 // Endpoint para crear un nuevo producto
-app.post('/products', (req, res) => {
+app.post('/products', async(req, res) => {
     const { name, price } = req.body;
-    const newProduct = { id: products.length + 1, name, price };
-    products.push(newProduct);
-    res.status(201).json(newProduct);
+    try {
+        const newProduct = new Product({ name, price });
+        await newProduct.save();
+        res.status(201).json(newProduct);
+    } catch (error) {
+        res.status(500).json({ error: 'Error creating product' });
+    }
 });
 
 // Endpoint para actualizar un producto por id
