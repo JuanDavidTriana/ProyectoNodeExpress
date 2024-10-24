@@ -61,7 +61,16 @@ app.patch('/products/:id', (req, res) => {
     res.status(200).json(product);
 });
 
-
+// Endpoint para eliminar un producto por id
+app.delete('/products/:id', (req, res) => {
+    const { id } = req.params;
+    const productIndex = products.findIndex(p => p.id === parseInt(id)); // Buscar el producto por id
+    if (productIndex === -1) {
+        return res.status(404).json({ error: 'Product not found' });
+    }
+    products.splice(productIndex, 1);
+    res.status(200).json({ message: 'Product deleted successfully' });
+});
 
 app.listen(port, () => {
     console.log(`Servidor escuchando en el puerto ${port}`);
