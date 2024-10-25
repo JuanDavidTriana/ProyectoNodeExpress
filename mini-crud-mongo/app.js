@@ -88,15 +88,20 @@ app.put('/products/:id', async (req, res) => {
 
 
 // Endpoint para eliminar un producto por id
-app.delete('/products/:id', (req, res) => {
+app.delete('/products/:id', async (req, res) => {
     const { id } = req.params;
-    const product = products.find(p => p.id === parseInt(id)); // Buscar el proyecto por id
-    if (!product) {
+
+    try {
+        const deletedProduct = await Product.findByIdAndDelete(id);
+    if (!deletedProduct) {
         return res.status(404).json({ error: 'Product not found' });
     }
-    const index = products.indexOf(product);
-    products.splice(index, 1);
     res.status(200).json({ message: 'Product deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ error: 'Error deleting product' });
+    }
+
+    
 });
 
 app.listen(port, () => {
