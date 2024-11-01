@@ -15,7 +15,17 @@ let products = [
     { id: 7, name: 'iMac', price: 1500 },
     { id: 8, name: 'Mac Mini', price: 800 },
     { id: 9, name: 'HomePod', price: 300 },
-    { id: 10, name: 'Magic Mouse', price: 80 }
+    { id: 10, name: 'Magic Mouse', price: 80 },
+    { id: 11, name: 'Apple Pencil', price: 99 },
+    { id: 12, name: 'Smart Keyboard', price: 159 },
+    { id: 13, name: 'iPhone 11 Case', price: 39 },
+    { id: 14, name: 'iPad Pro Case', price: 49 },
+    { id: 15, name: 'Apple EarPods', price: 29 },
+    { id: 16, name: 'Apple Watch Band', price: 49 },
+    { id: 17, name: 'Apple TV 4K', price: 199 },
+    { id: 18, name: 'Apple AirTag', price: 29 },
+    { id: 19, name: 'Apple TV HD', price: 99 },
+    { id: 20, name: 'Apple Pencil Case', price: 29 }
 ];
 
 // Endpoint para obtener todos los productos
